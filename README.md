@@ -19,11 +19,11 @@ demo@user.test
 1q2w3e++2023ABC
 
 # Test
-vendor/bin/phpunit tests/Feature/AuthJwtTest.php
-vendor/bin/phpunit tests/Feature/MotorCycleTest.php
-vendor/bin/phpunit tests/Feature/CarTest.php
-vendor/bin/phpunit tests/Feature/VechileTest.php
-vendor/bin/phpunit tests/Feature/SaleTest.php
+`vendor/bin/phpunit tests/Feature/AuthJwtTest.php`
+`vendor/bin/phpunit tests/Feature/MotorCycleTest.php`
+`vendor/bin/phpunit tests/Feature/CarTest.php`
+`vendor/bin/phpunit tests/Feature/VechileTest.php`
+`vendor/bin/phpunit tests/Feature/SaleTest.php`
 
 # Documentation
 [API documentation](https://www.postman.com/speeding-resonance-5236/workspace/vechilstock/collection/2692371-7d717c64-eb74-49f2-8888-6e0e194c17e5?action=share&creator=2692371)
