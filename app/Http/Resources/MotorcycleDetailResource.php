@@ -2,10 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
-class CarResource extends BaseResource
+class MotorcycleDetailResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +13,12 @@ class CarResource extends BaseResource
 
    public function toArray($request)
    {
-
-      return   $this->resource ? [
+      return  $this->resource ? [
          'id' => $this->id,
          'machine' => $this->machine,
+         'suspension' => $this->suspension,
+         'transmission' => $this->transmission,
          'variants' => VechileListResource::collection($this->vechiles),
-         'passenger' => $this->passenger,
-         'type' => $this->type,
          'created_at'=> $this->created_at->format('d/m/Y H:i:s'),
          'updated_at'=> $this->updated_at->format('d/m/Y H:i:s'),
       ] : [];

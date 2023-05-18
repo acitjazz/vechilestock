@@ -13,6 +13,6 @@ class Month extends Filter
       $year = Carbon::now()->format('Y');
       $start = Carbon::create()->year($year)->month(request($this->filterName()))->startOfMonth();
       $end = Carbon::create()->year($year)->month(request($this->filterName()))->endOfMonth();
-      return $builder->whereBetween('started_at', [$start,$end]);
+      return $builder->whereBetween('created_at', [$start,$end]);
    }
 }

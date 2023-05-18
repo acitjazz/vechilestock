@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 
-class VechileResource extends BaseResource
+class SaleResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,10 @@ class VechileResource extends BaseResource
    {
       return [
          'id' => $this->id,
+         'model_id' => $this->model_id,
          'vechile' => $this->type == 'Car'?
-                      CarResource::make($this->car)->only('machine','passenger','type') :
-                      MotorcycleResource::make($this->motorcycle)->only('machine','suspension','transmission'),
+                      CarResource::make($this->car)->only('machine','passenger','type','id') :
+                      MotorcycleResource::make($this->motorcycle)->only('machine','suspension','transmission','id'),
          'type' => $this->type,
          'price' => $this->price,
          'year' => $this->year,

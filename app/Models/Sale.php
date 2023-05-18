@@ -4,18 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Illuminate\Pipeline\Pipeline;
 
-class Vechile extends Eloquent
+class Sale extends Eloquent
 {
     use HasFactory;
-    use SoftDeletes;
     protected $connection = 'mongodb';
-    protected $collection = 'vechiles';
-    protected $dates = ['deleted_at'];
+    protected $collection = 'sales';
 
     protected $fillable = [
+        'vechile_id',
         'model_id',
         'type',
         'year',
@@ -24,6 +22,7 @@ class Vechile extends Eloquent
         'qty',
     ];
 
+
     protected $casts = [
         'type'       =>  'string',
         'color'       =>  'string',
@@ -31,7 +30,6 @@ class Vechile extends Eloquent
         'qty'       =>  'integer',
         'price'       =>  'float',
     ];
-
 
     public function setYearAttribute($year){
         $this->attributes['year'] = (int)$year;
@@ -60,11 +58,13 @@ class Vechile extends Eloquent
     public static function paginateWithFilters($limit)
     {
         return app(Pipeline::class)
-            ->send(Vechile::query())
+            ->send(Sale::query())
             ->through([
                 \App\QueryFilters\SortBy::class,
                 \App\QueryFilters\Type::class,
-                \App\QueryFilters\Year::class,
+                \App\QueryFilters\ModelId::class,
+                \App\QueryFilters\VechileId::class,
+                \App\QueryFilters\Month::class,
                 \App\QueryFilters\Color::class,
                 \App\QueryFilters\Trash::class,
             ])
@@ -75,11 +75,13 @@ class Vechile extends Eloquent
     public static function allWithFilters()
     {
         return app(Pipeline::class)
-            ->send(Vechile::query())
+            ->send(Sale::query())
             ->through([
                 \App\QueryFilters\SortBy::class,
                 \App\QueryFilters\Type::class,
-                \App\QueryFilters\Year::class,
+                \App\QueryFilters\ModelId::class,
+                \App\QueryFilters\VechileId::class,
+                \App\QueryFilters\Month::class,
                 \App\QueryFilters\Color::class,
                 \App\QueryFilters\Trash::class,
             ])

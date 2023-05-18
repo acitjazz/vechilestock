@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ModelidRule;
+use App\Rules\ModelTypeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,11 +17,12 @@ class VechileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'model_id' => ['string', 'max:255'],
-            'type' => ['string', 'max:255'],
-            'year' => ['number', 'digits:4'],
-            'price' => ['string', 'max:255'],
-            'color' => ['string', 'max:255'],
+            'model_id' => ['required','string', 'max:255', new ModelidRule],
+            'type' => ['required','string', 'max:255', new ModelTypeRule],
+            'year' => ['required', 'digits:4'],
+            'price' => ['required','integer'],
+            'qty' => ['required','integer'],
+            'color' => ['required','string', 'max:255'],
         ];
     }
 }

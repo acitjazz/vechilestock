@@ -22,6 +22,22 @@ class Car extends Eloquent
         'type',
     ];
 
+    protected $casts = [
+        'machine'       =>  'string',
+        'passenger'       =>  'integer',
+        'type'       =>  'string',
+    ];
+
+    public function setPassengerAttribute($passenger){
+        $this->attributes['passenger'] = (int)$passenger;
+    }
+
+    public function vechiles()
+    {
+        return $this->hasMany(Vechile::class,'model_id');
+    }
+
+
     public static function paginateWithFilters($limit)
     {
         return app(Pipeline::class)

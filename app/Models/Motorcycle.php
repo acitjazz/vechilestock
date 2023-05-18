@@ -21,13 +21,23 @@ class Motorcycle extends Eloquent
         'suspension',
         'transmission',
     ];
+
+    protected $casts = [
+        'machine'       =>  'string',
+        'suspension'       =>  'string',
+        'transmission'       =>  'string',
+    ];
+    public function vechiles()
+    {
+        return $this->hasMany(Vechile::class,'model_id');
+    }
+
     public static function paginateWithFilters($limit)
     {
         return app(Pipeline::class)
             ->send(Motorcycle::query())
             ->through([
                 \App\QueryFilters\SortBy::class,
-                \App\QueryFilters\Type::class,
                 \App\QueryFilters\Trash::class,
             ])
             ->thenReturn()
@@ -40,7 +50,6 @@ class Motorcycle extends Eloquent
             ->send(Motorcycle::query())
             ->through([
                 \App\QueryFilters\SortBy::class,
-                \App\QueryFilters\Type::class,
                 \App\QueryFilters\Trash::class,
             ])
             ->thenReturn()

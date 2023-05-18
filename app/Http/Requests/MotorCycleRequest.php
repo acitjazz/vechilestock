@@ -15,9 +15,9 @@ class MotorCycleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'machine' => ['string', 'max:255'],
-            'suspension' => ['string', 'max:255'],
-            'transmission' => ['string', 'max:255'],
+            'machine' => ['required','string', 'max:255'],
+            'suspension' => ['required','string', 'max:255'],
+            'transmission' => ['required','string', 'max:255'],
         ];
     }
 }

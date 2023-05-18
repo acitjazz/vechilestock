@@ -4,8 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
-class CarRequest extends FormRequest
+
+class LoginRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,9 +17,8 @@ class CarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'machine' => ['string','required', 'max:255'],
-            'passenger' => ['integer','required'],
-            'type' => ['string','required', 'max:255'],
+            'email' => 'required|string|email',
+       //     'password' => ['required',Password::min(8)->letters()->mixedCase()->numbers()->symbols()]
         ];
     }
 }
